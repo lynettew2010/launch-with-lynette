@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch with Lynette | Coach Launch Partner — From Idea to Live in 30 Days</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a25;
+            --accent-pink: #ff40a0;
+            --accent-purple: #7c5cff;
+            --accent-gradient: linear-gradient(135deg, #ff40a0 0%, #7c5cff 100%);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.72);
+            --text-muted: rgba(255,255,255,0.52);
+            --border: rgba(255,255,255,0.12);
+            --glow-pink: 0 0 40px rgba(255,64,160,0.3);
+            --glow-purple: 0 0 40px rgba(124,92,255,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,64,160,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124,92,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(124,92,255,0.08) 0%, transparent 70%);
+            animation: meshMove 20s ease-in-out infinite;
+        }
+
+        @keyframes meshMove {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px,-30px) scale(1.1); }
+            66% { transform: translate(-20px,20px) scale(0.95); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-cta {
+            background: var(--accent-gradient);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: var(--glow-pink);
+        }
+
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,64,160,0.15);
+            border: 1px solid rgba(255,64,160,0.3);
+            padding: 8px 20px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-pink);
+            margin-bottom: 24px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,64,160,0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(255,64,160,0.2); }
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .problem-card, .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa500);
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .card-icon {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .problem-card .card-icon {
+            background: rgba(255,107,107,0.15);
+            border: 1px solid rgba(255,107,107,0.3);
+        }
+
+        .solution-card .card-icon {
+            background: rgba(255,64,160,0.15);
+            border: 1px solid rgba(255,64,160,0.3);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-list li::before {
+            content: '×';
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .solution-card .card-list li::before {
+            content: '✓';
+            color: #00d084;
+        }
+
+        /* Case Studies */
+        .case-studies {
+            display: grid;
+            gap: 40px;
+        }
+
+        .case-study {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .case-study:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4), var(--glow-purple);
+        }
+
+        .case-content {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .case-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124,92,255,0.15);
+            border: 1px solid rgba(124,92,255,0.3);
+            color: var(--accent-purple);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            width: fit-content;
+            margin-bottom: 20px;
+        }
+
+        .case-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .case-desc {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .case-results {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .case-result {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-result-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-pink);
+        }
+
+        .case-result-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .case-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tech-tag {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .case-visual {
+            background: linear-gradient(135deg, rgba(255,64,160,0.1) 0%, rgba(124,92,255,0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .case-visual::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,64,160,0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .case-mockup {
+            position: relative;
+            z-index: 2;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            width: 80%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mockup-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot:nth-child(1) { background: #ff6b6b; }
+        .mockup-dot:nth-child(2) { background: #ffa500; }
+        .mockup-dot:nth-child(3) { background: #00d084; }
+
+        .mockup-content {
+            space-y: 12px;
+        }
+
+        .mockup-line {
+            height: 12px;
+            background: var(--bg-elevated);
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .mockup-line:nth-child(1) { width: 100%; }
+        .mockup-line:nth-child(2) { width: 80%; }
+        .mockup-line:nth-child(3) { width: 60%; }
+
+        /* Portfolio Image Styling */
+        .portfolio-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .portfolio-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .portfolio-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgba(255,64,160,0.12);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ClickUp Section with Real Images */
+        .clickup-section {
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(123,104,238,0.05) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .clickup-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .clickup-card {
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .clickup-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 12px;
+        }
+
+        .clickup-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .clickup-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .shot-list {
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .shot-list h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 20px;
+            color: var(--accent-purple);
+        }
+
+        .shot-list ul {
+            list-style: none;
+        }
+
+        .shot-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .shot-list li:last-child {
+            border-bottom: none;
+        }
+
+        .shot-num {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--bg-deep);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .resource-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(0,208,132,0.15);
+            border: 1px solid rgba(0,208,132,0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .resource-content h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 6px;
+        }
+
+        .resource-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .resource-tag {
+            background: rgba(0,208,132,0.1);
+            color: #00d084;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        /* Course Showcase Section */
+        .course-showcase {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 40px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .course-image-card {
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .course-image-card .portfolio-image-container {
+            border: none;
+            border-radius: 0;
+        }
+
+        .course-image-card p {
+            padding: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Automation Grid */
+        .automation-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .automation-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .automation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-purple);
+        }
+
+        .automation-card .portfolio-image-container {
+            border: none;
+            border-radius: 0;
+        }
+
+        .automation-card img {
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .automation-content {
+            padding: 20px;
+        }
+
+        .automation-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .automation-content h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .automation-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-pink) 0%, var(--accent-purple) 100%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            width: 90%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 30px;
+            width: 16px; height: 16px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            transform: rotate(45deg);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 30px;
+            width: 16px; height: 16px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            transform: rotate(45deg);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px; height: 20px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            border: 4px solid var(--bg-deep);
+            box-shadow: var(--glow-pink);
+        }
+
+        .timeline-phase {
+            font-size: 0.8rem;
+            color: var(--accent-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-deep) 0%, rgba(124,92,255,0.1) 100%);
+        }
+
+        .cta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 60px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,64,160,0.15) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-text {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: var(--glow-pink);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(255,64,160,0.4);
+        }
+
+        .cta-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .problem-grid, .case-study, .clickup-showcase, .resources-grid, .course-grid, .automation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .timeline-dot { left: 20px; }
+            .timeline-item .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -8px;
+                right: auto;
+                border: none;
+                border-bottom: 1px solid var(--border);
+                border-left: 1px solid var(--border);
+            }
+            .nav-links { display: none; }
+            .automation-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .automation-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Launch with Lynette</div>
+            <ul class="nav-links">
+                <li><a href="#work">Case Studies</a></li>
+                <li><a href="#systems">Systems</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="https://calendly.com/lynette-wilsonlggrp/consultation" class="nav-cta">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span>⚡</span> Now booking: 3 launch spots for April
+            </div>
+            <h1>You've been "launching soon" for months.<br>Let's get you <span>live and selling.</span></h1>
+            <p class="hero-subtitle">
+                I help coaches stop planning and start profiting. End-to-end launch systems: 
+                offer design, sales pages, email automations, and the tech stack that actually works while you sleep.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Brands Launched</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Days to Launch</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$0</div>
+                    <div class="stat-label">Tech Headaches</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Launch Gap</h2>
+                <p>Most coaches get stuck in the same cycle. Here's how we break it.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="card-icon">😰</div>
+                    <h3 class="card-title">Stuck in Planning Mode</h3>
+                    <ul class="card-list">
+                        <li>Months spent "perfecting" the offer</li>
+                        <li>Paralyzed by platform choices</li>
+                        <li>Automations that never get built</li>
+                        <li>Content that never sees the light of day</li>
+                    </ul>
+                </div>
+                <div class="solution-card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">The Launch Partner Model</h3>
+                    <ul class="card-list">
+                        <li>Offer validated and priced in 48 hours</li>
+                        <li>Tech stack selected and connected</li>
+                        <li>Automations running on day 1</li>
+                        <li>Sales system live and converting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Case Studies</h2>
+                <p>Real launches. Real systems. Built to run without you.</p>
+            </div>
+
+            <!-- LW Trades Course Showcase -->
+            <div class="course-showcase">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+                    <div>
+                        <div class="case-tag">Trading Education</div>
+                        <h3 class="case-title" style="font-size: 2.5rem; margin-bottom: 20px;">Funded Trader Survival Blueprint</h3>
+                        <p class="case-desc" style="font-size: 1.1rem;">
+                            Complete 5-module trading psychology course for prop firm traders. Features interactive HTML slides, 
+                            automated email sequences, structured curriculum, and integrated resource downloads. 
+                            Multi-tier pricing with Klarna payment plans.
+                        </p>
+                        <div class="case-results" style="margin: 32px 0;">
+                            <div class="case-result">
+                                <div class="case-result-number">$97</div>
+                                <div class="case-result-label">Course Price</div>
+                            </div>
+                            <div class="case-result">
+                                <div class="case-result-number">5</div>
+                                <div class="case-result-label">Modules</div>
+                            </div>
+                            <div class="case-result">
+                                <div class="case-result-number">100%</div>
+                                <div class="case-result-label">Automated</div>
+                            </div>
+                        </div>
+                        <div class="case-tech">
+                            <span class="tech-tag">Teachable</span>
+                            <span class="tech-tag">GitHub Pages</span>
+                            <span class="tech-tag">ConvertKit</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Student%20view%20of%20course.png" 
+                             alt="Student Course View">
+                    </div>
+                </div>
+
+                <div class="course-grid">
+                    <div class="course-image-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-watermark">Launch with Lynette</div>
+                            <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Modules%201%20and%202.png" 
+                                 alt="Modules 1 and 2">
+                        </div>
+                        <p>Modules 1-2: Foundation & Risk Identity</p>
+                    </div>
+                    <div class="course-image-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-watermark">Launch with Lynette</div>
+                            <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Modules%203-4-5-resources.png" 
+                                 alt="Modules 3-5 and Resources">
+                        </div>
+                        <p>Modules 3-5: Psychology & Downloadables</p>
+                    </div>
+                    <div class="course-image-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-watermark">Launch with Lynette</div>
+                            <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Pricing.png" 
+                                 alt="Pricing Structure">
+                        </div>
+                        <p>Multi-tier pricing with payment plans</p>
+                    </div>
+                    <div class="course-image-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-watermark">Launch with Lynette</div>
+                            <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Blurred%20student%20page.png" 
+                                 alt="Student Management">
+                        </div>
+                        <p>Backend student analytics dashboard</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wilson Legacy Group Case Study -->
+            <div class="case-study">
+                <div class="case-content">
+                    <div class="case-tag" style="background: rgba(255,64,160,0.15); border-color: rgba(255,64,160,0.3); color: var(--accent-pink);">Financial Services</div>
+                    <h3 class="case-title">Insurance + Recruiting Funnel</h3>
+                    <p class="case-desc">
+                        Dual-purpose funnel: Client acquisition for life insurance + automated 
+                        recruiting pipeline for agents. Integrated scheduling, email sequences, 
+                        and lead qualification without manual follow-up.
+                    </p>
+                    <div class="case-results">
+                        <div class="case-result">
+                            <div class="case-result-number">2</div>
+                            <div class="case-result-label">Revenue Streams</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-number">1</div>
+                            <div class="case-result-label">Click</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-number">Auto</div>
+                            <div class="case-result-label">Qualification</div>
+                        </div>
+                    </div>
+                    <div class="case-tech">
+                        <span class="tech-tag">Squarespace</span>
+                        <span class="tech-tag">Kit</span>
+                        <span class="tech-tag">Zapier</span>
+                        <span class="tech-tag">Acuity</span>
+                        <span class="tech-tag">ClickUp</span>
+                    </div>
+                </div>
+                <div class="case-visual" style="background: linear-gradient(135deg, rgba(255,64,160,0.1) 0%, rgba(255,100,180,0.1) 100%);">
+                    <div class="case-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <span style="margin-left: auto; font-size: 0.8rem; color: var(--text-muted);">Automation Flow</span>
+                        </div>
+                        <div class="mockup-content">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">Form Submit</span>
+                                <span style="color: var(--accent-pink);">→</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">Tag</span>
+                                <span style="color: var(--accent-pink);">→</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">Email</span>
+                            </div>
+                            <div class="mockup-line"></div>
+                            <div class="mockup-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLICKUP SECTION WITH REAL IMAGES -->
+    <section id="systems" class="clickup-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Systems That Scale</h2>
+                <p>No chaos. No dropped balls. Just organized execution with full transparency.</p>
+            </div>
+
+            <div class="clickup-showcase">
+                <div class="clickup-card">
+                    <h3>📋 Project Management</h3>
+                    <p>Every launch follows a 30-day timeline with clear phases, dependencies, and milestones. Clients see exactly where things stand.</p>
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Active-Launch-Folder-View.png" 
+                             alt="Active Launches Board View" class="clickup-image">
+                    </div>
+                    <div class="image-caption">Managing multiple active launches simultaneously</div>
+                </div>
+                <div class="clickup-card">
+                    <h3>📊 Visual Progress Tracking</h3>
+                    <p>Kanban boards show real-time status across all phases. Color-coded by week for instant clarity.</p>
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Sara-D-Launch-Board-View.png" 
+                             alt="Sara D Launch Board View" class="clickup-image">
+                    </div>
+                    <div class="image-caption">Phase-based organization with status tracking</div>
+                </div>
+            </div>
+
+            <div class="clickup-showcase">
+                <div class="clickup-card">
+                    <h3>📑 Detailed Task Views</h3>
+                    <p>List views provide granular visibility into every deliverable, deadline, and dependency.</p>
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Sara-D-Launch-List-View.png" 
+                             alt="Sara D Launch List View" class="clickup-image">
+                    </div>
+                    <div class="image-caption">Organized by phase with custom tags</div>
+                </div>
+                <div class="shot-list">
+                    <h4>📸 What You're Seeing</h4>
+                    <ul>
+                        <li>
+                            <span class="shot-num">1</span>
+                            <div>
+                                <strong>Multi-Client Management</strong><br>
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">3 launches at different stages</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="shot-num">2</span>
+                            <div>
+                                <strong>Phase-Based Organization</strong><br>
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">Week 1-4 structure with tags</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="shot-num">3</span>
+                            <div>
+                                <strong>Real-Time Status</strong><br>
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">To Do / In Progress / Complete</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTOMATION STACK SECTION -->
+    <section id="automations" style="background: var(--bg-deep);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Automation Stack</h2>
+                <p>Integrated systems that connect lead generation to course delivery.</p>
+            </div>
+
+            <div class="automation-grid">
+                <div class="automation-card">
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Budget%20Kit%20Email%20Sequence.png" 
+                             alt="ConvertKit Email Sequence">
+                    </div>
+                    <div class="automation-content">
+                        <span class="automation-tag" style="color: #ff6b6b;">ConvertKit</span>
+                        <h4>Email Sequences</h4>
+                        <p>Visual automations & subscriber tagging</p>
+                    </div>
+                </div>
+
+                <div class="automation-card">
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Zapier%20Workflow.png" 
+                             alt="Zapier Workflow">
+                    </div>
+                    <div class="automation-content">
+                        <span class="automation-tag" style="color: #ffa500;">Zapier</span>
+                        <h4>Integration Flows</h4>
+                        <p>Multi-app data syncing & triggers</p>
+                    </div>
+                </div>
+
+                <div class="automation-card">
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Budget%20E-book%20lead%20magnet.png" 
+                             alt="Lead Magnet">
+                    </div>
+                    <div class="automation-content">
+                        <span class="automation-tag" style="color: #00d084;">Lead Gen</span>
+                        <h4>Lead Magnets</h4>
+                        <p>PDF design & automated delivery</p>
+                    </div>
+                </div>
+
+                <div class="automation-card">
+                    <div class="portfolio-image-container">
+                        <div class="portfolio-watermark">Launch with Lynette</div>
+                        <img src="https://lynettew2010.github.io/Lynettewilson-portfolio/Mentorship%20Landing%20page.png" 
+                             alt="Landing Page">
+                    </div>
+                    <div class="automation-content">
+                        <span class="automation-tag" style="color: var(--accent-purple);">Web</span>
+                        <h4>Landing Pages</h4>
+                        <p>Custom HTML/CSS builds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESOURCES SECTION -->
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Course Resources That Deliver</h2>
+                <p>Not just videos—tools students actually use. Branded, actionable, and ready to implement.</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📓</div>
+                    <div class="resource-content">
+                        <h4>30-Day Trading Journal</h4>
+                        <p>Daily tracking system for trades, emotions, and patterns. Built for prop firm traders to identify psychological triggers before they blow accounts.</p>
+                        <div class="resource-meta">
+                            <span class="resource-tag">PDF</span>
+                            <span>Printable</span>
+                            <span>Branded</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">✅</div>
+                    <div class="resource-content">
+                        <h4>Pre-Trade Checklist</h4>
+                        <p>Mandatory 5-point checklist before every trade. Stops impulse entries and revenge trading in its tracks. Laminate it for your trading desk.</p>
+                        <div class="resource-meta">
+                            <span class="resource-tag">PDF</span>
+                            <span>Wallet Size</span>
+                            <span>Branded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px;">
+                <h4 style="font-family: 'Space Grotesk', sans-serif; margin-bottom: 16px;">🎯 Resource Strategy</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                    These aren't filler downloads—they're tools I built because traders actually need them. 
+                    Every resource connects to the course psychology and gets used daily.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                    <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 12px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">📄</div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">PDF Format</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Print or digital</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 12px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">🎨</div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">On-Brand</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Consistent brand styling</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 12px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">⚡</div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">Actionable</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Not just theory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>The 30-Day Launch</h2>
+                <p>From first call to first sale. No fluff, no delays, no tech headaches.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Week 1</div>
+                        <h3 class="timeline-title">Strategy & Stack</h3>
+                        <p class="timeline-desc">Offer validation, pricing, platform selection, and automation mapping. We define the entire customer journey before building.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Week 2</div>
+                        <h3 class="timeline-title">Asset Creation</h3>
+                        <p class="timeline-desc">Sales page copy, email sequences, course content structure, and lead magnet design. All branded and conversion-focused.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Week 3</div>
+                        <h3 class="timeline-title">Build & Connect</h3>
+                        <p class="timeline-desc">Page development, automation setup, payment processing, and testing. Every click tracked, every email timed.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Week 4</div>
+                        <h3 class="timeline-title">Launch & Optimize</h3>
+                        <p class="timeline-desc">Soft launch to warm audience, analytics review, quick wins implementation, and handoff with training videos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to stop planning and start selling?</h2>
+                    <p class="cta-text">
+                        Book a free 20-minute call. We'll map out your launch, identify the bottlenecks, 
+                        and see if we're a fit to work together.
+                    </p>
+                    <a href="https://calendly.com/lynette-wilsonlggrp/consultation" class="cta-button">
+                        <span>Book Your Launch Call</span>
+                        <span>→</span>
+                    </a>
+                    <p class="cta-note">
+                        Currently booking 3 projects for April 2026. Spots fill fast.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 24px;">
+                <a href="https://www.upwork.com/freelancers/~01498af381abcb53f4" target="_blank" 
+                   style="display: inline-flex; align-items: center; gap: 8px; background: #14a800; color: white; 
+                          padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600;
+                          transition: transform 0.3s, box-shadow 0.3s;"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(20,168,0,0.3)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.215 2.703 2.71 0 1.489-1.212 2.695-2.704 2.695zm-.008-7.633c-3.263 0-4.835 2.167-5.609 4.17-.46-1.234-1.271-3.083-2.009-4.17H6.759v6.027c0 1.62-1.319 2.938-2.942 2.938-1.62 0-2.94-1.319-2.94-2.938V5.525H0v6.027c0 3.111 2.534 5.645 5.645 5.645 3.11 0 5.642-2.534 5.642-5.645v-1.013c.563 1.038 1.378 2.604 1.738 3.69l-1.382 6.504h2.552l.998-4.695c.855.551 1.932.889 3.16.889 2.795 0 5.07-2.27 5.07-5.066 0-2.796-2.275-5.066-5.072-5.066z"/>
+                    </svg>
+                    Hire me on Upwork
+                </a>
+                <a href="https://www.linkedin.com/in/lynette-wilson-pmp/" target="_blank"
+                   style="display: inline-flex; align-items: center; gap: 8px; background: #0a66c2; color: white; 
+                          padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600;
+                          transition: transform 0.3s, box-shadow 0.3s;"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(10,102,194,0.3)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+            <p>© 2026 Launch with Lynette. Built with systems, not guesswork.</p>
+        </div>
+    </footer>
+</body>
+</html>
