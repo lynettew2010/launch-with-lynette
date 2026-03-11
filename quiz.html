@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Your #1 Launch Blocker? | Launch with Lynette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a25;
+            --accent-pink: #ff40a0;
+            --accent-purple: #7c5cff;
+            --accent-gradient: linear-gradient(135deg, #ff40a0 0%, #7c5cff 100%);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.72);
+            --text-muted: rgba(255,255,255,0.52);
+            --border: rgba(255,255,255,0.12);
+            --glow-pink: 0 0 40px rgba(255,64,160,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,64,160,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124,92,255,0.15) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quiz-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            transition: width 0.4s ease;
+        }
+
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+        }
+
+        .question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: var(--bg-elevated);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .option:hover {
+            border-color: var(--accent-pink);
+            background: rgba(255,64,160,0.05);
+        }
+
+        .option.selected {
+            border-color: var(--accent-pink);
+            background: rgba(255,64,160,0.1);
+        }
+
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background: var(--accent-pink);
+            border-color: var(--accent-pink);
+            color: white;
+        }
+
+        .btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 24px;
+            box-shadow: var(--glow-pink);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(255,64,160,0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .email-step { text-align: center; }
+        .result-icon { font-size: 4rem; margin-bottom: 16px; }
+        .result-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+            color: var(--accent-pink);
+        }
+        .result-desc {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        /* Simple Email Form Styling */
+        .simple-form {
+            margin: 24px 0;
+        }
+        
+        .simple-form input[type="email"] {
+            background: var(--bg-elevated);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            padding: 16px 20px;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .simple-form input[type="email"]:focus {
+            border-color: var(--accent-pink);
+        }
+        
+        .simple-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .simple-form button {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 16px 32px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: var(--glow-pink);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .simple-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(255,64,160,0.4);
+        }
+
+        .privacy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .testimonial {
+            background: var(--bg-elevated);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+            border-left: 4px solid var(--accent-pink);
+            text-align: left;
+        }
+
+        @media (max-width: 640px) {
+            .quiz-container { padding: 32px 24px; }
+            h1 { font-size: 1.5rem; }
+            .question { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+    <div class="container">
+        <div class="logo">Launch with Lynette</div>
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 33%"></div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step active" data-step="1">
+                <h1>What's Your #1 Launch Blocker?</h1>
+                <p class="subtitle">Take this 3-minute quiz to discover exactly what's keeping your course stuck—and how to fix it.</p>
+                <div class="question">How long have you been "working on" your course launch?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'A')">
+                        <div class="option-letter">A</div>
+                        <div class="option-text">Less than 3 months</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'B')">
+                        <div class="option-letter">B</div>
+                        <div class="option-text">3-6 months</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'C')">
+                        <div class="option-letter">C</div>
+                        <div class="option-text">6-12 months</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'D')">
+                        <div class="option-letter">D</div>
+                        <div class="option-text">Over a year</div>
+                    </div>
+                </div>
+                <button class="btn" onclick="nextStep(2)" disabled id="btn-1">Continue →</button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" data-step="2">
+                <h1>What's Your #1 Launch Blocker?</h1>
+                <p class="subtitle">Question 2 of 3</p>
+                <div class="question">What's the ONE thing that stops you every time?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'tech')">
+                        <div class="option-letter">A</div>
+                        <div class="option-text">Tech overwhelm — I don't know what tools to use</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'time')">
+                        <div class="option-letter">B</div>
+                        <div class="option-text">Time — I'm too busy to figure it all out</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'perfection')">
+                        <div class="option-letter">C</div>
+                        <div class="option-text">Perfectionism — I keep tweaking instead of shipping</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'fear')">
+                        <div class="option-letter">D</div>
+                        <div class="option-text">Fear — What if nobody buys?</div>
+                    </div>
+                </div>
+                <button class="btn" onclick="nextStep(3)" disabled id="btn-2">Continue →</button>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" data-step="3">
+                <h1>What's Your #1 Launch Blocker?</h1>
+                <p class="subtitle">Final question</p>
+                <div class="question">If you could wave a magic wand, what would happen?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'done')">
+                        <div class="option-letter">A</div>
+                        <div class="option-text">My course would be LIVE and selling — completely done for me</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'system')">
+                        <div class="option-letter">B</div>
+                        <div class="option-text">I'd have a system that runs itself</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'clarity')">
+                        <div class="option-letter">C</div>
+                        <div class="option-text">I'd finally have clarity on what to do</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'revenue')">
+                        <div class="option-letter">D</div>
+                        <div class="option-text">I'd have revenue from something I built once</div>
+                    </div>
+                </div>
+                <button class="btn" onclick="showResult()" disabled id="btn-3">Reveal My Blocker →</button>
+            </div>
+
+            <!-- Email Step with Simple Form -->
+            <div class="step email-step" data-step="4">
+                <div class="result-icon" id="result-icon">🎯</div>
+                <div class="result-title" id="result-title">The Tech Trap</div>
+                <div class="result-desc" id="result-desc">
+                    You're stuck because you're trying to become a tech expert instead of a course creator. 
+                    <br><br>
+                    <strong>Here's the truth:</strong> You don't need to learn Zapier, ClickFunnels, or email marketing. 
+                    You need someone who already knows this stuff to just <em>do it for you</em>.
+                </div>
+                
+                <!-- Simple Email Form -->
+                <form class="simple-form" id="email-form" onsubmit="handleEmailSubmit(event)">
+                    <input type="email" id="email-input" placeholder="Enter your email address" required>
+                    <button type="submit">Send Me My Personalized Fix →</button>
+                </form>
+                
+                <p class="privacy">🔒 No spam. Unsubscribe anytime.</p>
+                
+                <div class="testimonial">
+                    <div style="font-style: italic; color: var(--text-secondary); margin-bottom: 12px;">
+                        "I spent 8 months trying to 'figure out the tech' before working with Lynette. We had my course live in 23 days."
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.9rem;">— Sarah D., Career Coach</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let answers = {};
+        let currentStep = 1;
+        let blockerType = 'tech';
+
+        function selectOption(element, value) {
+            const step = element.closest('.step');
+            step.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            answers[currentStep] = value;
+            if (currentStep === 2) blockerType = value;
+            document.getElementById('btn-' + currentStep).disabled = false;
+        }
+
+        function nextStep(step) {
+            document.querySelector('.step.active').classList.remove('active');
+            document.querySelector('[data-step="' + step + '"]').classList.add('active');
+            currentStep = step;
+            document.getElementById('progress').style.width = (step * 33) + '%';
+        }
+
+        function showResult() {
+            const results = {
+                tech: { icon: '🛠️', title: 'The Tech Trap', desc: "You're stuck because you're trying to become a tech expert instead of a course creator. <br><br><strong>Here's the truth:</strong> You don't need to learn Zapier, ClickFunnels, or email marketing. You need someone who already knows this stuff to just <em>do it for you</em>." },
+                time: { icon: '⏰', title: 'The Time Vortex', desc: "You're telling yourself 'I'll launch when I have more time' — but that time never comes. <br><br><strong>Here's the truth:</strong> You don't need more time. You need someone to handle the launch so you can keep doing what you do best — coaching." },
+                perfection: { icon: '✨', title: 'The Perfectionism Paralysis', desc: "Your course isn't launched because it's not 'perfect' yet. <br><br><strong>Here's the truth:</strong> Perfection is just fear in disguise. Your audience doesn't need perfect — they need <em>now</em>." },
+                fear: { icon: '😰', title: 'The Fear Factor', desc: "You're afraid of putting yourself out there. <br><br><strong>Here's the truth:</strong> The only real failure is never launching. Every successful course creator started with zero sales." }
+            };
+            const result = results[blockerType] || results.tech;
+            document.getElementById('result-icon').textContent = result.icon;
+            document.getElementById('result-title').textContent = result.title;
+            document.getElementById('result-desc').innerHTML = result.desc;
+            nextStep(4);
+            document.getElementById('progress').style.width = '100%';
+        }
+
+        function handleEmailSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('email-input').value;
+            
+            // Send to MailerLite using their API
+            const formData = new FormData();
+            formData.append('fields[email]', email);
+            formData.append('ml-submit', '1');
+            
+            fetch('https://dashboard.mailerlite.com/forms/3Vg1Qv/subscribe', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).catch(() => {
+                // Ignore errors, just redirect
+            });
+            
+            // Redirect to sales page
+            setTimeout(function() {
+                window.location.href = '30-day-launch.html?utm_source=quiz&utm_medium=landing-page&utm_campaign=launch-blocker&utm_content=' + blockerType;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
