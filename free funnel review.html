@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Funnel Review Thumbnail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        .thumbnail {
+            width: 1200px;
+            height: 627px;
+            background: #0f0f1a;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 74, 165, 0.15);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(138, 99, 255, 0.12);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 50px 60px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4aa5 0%, #8a63ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .free-badge {
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #0f0f1a;
+            background: linear-gradient(135deg, #ff4aa5 0%, #8a63ff 100%);
+            padding: 10px 25px;
+            border-radius: 30px;
+        }
+
+        .title-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .main-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 80px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -0.03em;
+        }
+
+        .main-title span {
+            background: linear-gradient(135deg, #ff4aa5 0%, #8a63ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            max-width: 800px;
+            line-height: 1.5;
+        }
+
+        .features {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .check {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #ff4aa5 0%, #8a63ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4aa5 0%, #8a63ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta {
+            font-size: 18px;
+            font-weight: 600;
+            color: #8a63ff;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="thumbnail">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="content">
+            <div class="header">
+                <div class="brand">Launch with Lynette</div>
+                <div class="free-badge">FREE</div>
+            </div>
+
+            <div class="title-area">
+                <h1 class="main-title">Get Your <span>Funnel Reviewed</span></h1>
+                <p class="subtitle">Expert eyes on your offer, landing page, and email sequence—no cost, no pitch, just clarity</p>
+
+                <div class="features">
+                    <div class="feature">
+                        <div class="check">✓</div>
+                        <span>Landing page audit</span>
+                    </div>
+                    <div class="feature">
+                        <div class="check">✓</div>
+                        <span>Email sequence review</span>
+                    </div>
+                    <div class="feature">
+                        <div class="check">✓</div>
+                        <span>Conversion gaps identified</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-brand">Launch with Lynette</div>
+                <div class="cta">Request Your Review →</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
