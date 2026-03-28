@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's Blocking Your Launch? | Launch with Lynette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '471269748606637');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=471269748606637&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  
+  <!-- MailerLite Universal -->
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2180739');
+  </script>
+  <!-- End MailerLite Universal -->
+  
+  <style>
+    :root{
+      --bg-deep:#0a0a0f;
+      --bg-card:#12121a;
+      --bg-elevated:#1a1a25;
+      --accent-pink:#ff40a0;
+      --accent-purple:#7c5cff;
+      --accent-gradient:linear-gradient(135deg,#ff40a0 0%,#7c5cff 100%);
+      --text-primary:#ffffff;
+      --text-secondary:rgba(255,255,255,0.78);
+      --text-muted:rgba(255,255,255,0.56);
+      --border:rgba(255,255,255,0.11);
+      --glow:0 0 38px rgba(255,64,160,0.22);
+      --success:#48BB78;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',sans-serif;
+      color:var(--text-primary);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,64,160,.14) 0%, transparent 34%),
+        radial-gradient(circle at 85% 20%, rgba(124,92,255,.12) 0%, transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(255,64,160,.06) 0%, transparent 38%),
+        var(--bg-deep);
+      line-height:1.55;
+      min-height:100vh;
+    }
+    .container{max-width:800px;margin:0 auto;padding:0 24px}
+    .topbar{padding:24px 0;display:flex;justify-content:space-between;align-items:center;}
+    .brand{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1.45rem;
+      font-weight:700;
+      background:var(--accent-gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .hero{padding:40px 0 60px;text-align:center;}
+    .urgency-bar{
+      background:linear-gradient(90deg, rgba(255,64,160,.2), rgba(124,92,255,.2));
+      border:1px solid rgba(255,64,160,.3);
+      border-radius:999px;
+      padding:12px 24px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:30px;
+      font-weight:600;
+      font-size:0.9rem;
+    }
+    .pulse{animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    h1{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(2.2rem,5vw,3.5rem);
+      letter-spacing:-0.03em;
+      line-height:1.1;
+      margin-bottom:20px;
+    }
+    .gradient-text{
+      background:var(--accent-gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .hero-sub{
+      max-width:600px;
+      margin:0 auto 40px;
+      color:var(--text-secondary);
+      font-size:1.15rem;
+      line-height:1.7;
+    }
+    .progress-container{max-width:400px;margin:0 auto 40px;}
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:10px;
+      font-size:0.85rem;
+      color:var(--text-muted);
+    }
+    .progress-bar{
+      height:8px;
+      background:var(--bg-elevated);
+      border-radius:4px;
+      overflow:hidden;
+    }
+    .progress-fill{
+      height:100%;
+      background:var(--accent-gradient);
+      width:0%;
+      transition:width 0.5s ease;
+      box-shadow:var(--glow);
+    }
+    .quiz-container{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:40px;
+      margin-bottom:40px;
+    }
+    @media(max-width:600px){.quiz-container{padding:25px}}
+    .question{display:none}
+    .question.active{
+      display:block;
+      animation:fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .question h2{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1.5rem;
+      margin-bottom:30px;
+      text-align:center;
+      line-height:1.3;
+    }
+    .options{display:flex;flex-direction:column;gap:12px;}
+    .option{
+      background:var(--bg-elevated);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:20px 24px;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      text-align:left;
+      font-size:1rem;
+      color:var(--text-primary);
+      font-family:'Inter',sans-serif;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .option:hover{
+      border-color:var(--accent-purple);
+      background:rgba(124,92,255,0.1);
+      transform:translateY(-2px);
+    }
+    .option.selected{
+      border-color:var(--accent-pink);
+      background:linear-gradient(135deg, rgba(255,64,160,.15), rgba(124,92,255,.15));
+    }
+    .option-emoji{font-size:1.5rem}
+    .result-section{display:none}
+    .result-section.active{
+      display:block;
+      animation:fadeIn 0.6s ease;
+    }
+    .result-badge{
+      display:inline-block;
+      background:var(--accent-gradient);
+      color:#fff;
+      padding:8px 20px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:0.9rem;
+      margin-bottom:20px;
+    }
+    .result-title{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:2rem;
+      margin-bottom:20px;
+    }
+    .notification-mockup{
+      background:var(--bg-elevated);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:25px;
+      margin:30px auto;
+      max-width:400px;
+    }
+    .phone-screen{
+      background:#0f0f17;
+      border-radius:16px;
+      padding:20px;
+      border:2px solid rgba(255,255,255,0.08);
+    }
+    .notification{
+      background:linear-gradient(135deg, rgba(255,64,160,.15), rgba(124,92,255,.15));
+      border-left:4px solid var(--accent-pink);
+      border-radius:12px;
+      padding:16px;
+      text-align:left;
+      margin:10px 0;
+    }
+    .notif-title{
+      color:#fff;
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:4px;
+    }
+    .notif-sub{
+      color:var(--text-muted);
+      font-size:13px;
+    }
+    .scenario-text{
+      font-style:italic;
+      color:var(--text-secondary);
+      margin-top:15px;
+      font-size:0.9rem;
+      line-height:1.6;
+    }
+    .pain-box{
+      background:linear-gradient(135deg, rgba(255,64,160,.1), rgba(124,92,255,.05));
+      border:1px solid rgba(255,64,160,.2);
+      border-radius:20px;
+      padding:30px;
+      margin:30px 0;
+      text-align:left;
+    }
+    .pain-box h3{
+      color:var(--accent-pink);
+      margin-bottom:15px;
+      font-size:1.1rem;
+      font-family:'Space Grotesk',sans-serif;
+    }
+    .pain-box ul{list-style:none;}
+    .pain-box li{
+      padding:10px 0;
+      padding-left:30px;
+      position:relative;
+      color:var(--text-secondary);
+      font-size:0.95rem;
+    }
+    .pain-box li::before{
+      content:"💸";
+      position:absolute;
+      left:0;
+    }
+    .revenue-counter{
+      background:linear-gradient(135deg, rgba(255,64,160,.1), rgba(124,92,255,.1));
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:25px;
+      text-align:center;
+      margin:30px 0;
+    }
+    .counter-label{
+      font-size:0.9rem;
+      color:var(--text-secondary);
+      margin-bottom:8px;
+    }
+    .counter-amount{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:2.5rem;
+      font-weight:700;
+      background:var(--accent-gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .email-gate{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:40px;
+      margin-top:40px;
+      text-align:center;
+    }
+    .email-gate h3{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1.5rem;
+      margin-bottom:10px;
+    }
+    .email-gate p{
+      color:var(--text-secondary);
+      margin-bottom:25px;
+      font-size:0.95rem;
+    }
+    .discount-badge{
+      display:inline-block;
+      background:rgba(255,64,160,.2);
+      border:1px solid rgba(255,64,160,.4);
+      color:#ff63b6;
+      padding:8px 16px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:0.85rem;
+      margin-bottom:20px;
+    }
+    
+    /* Override MailerLite default styles */
+    .ml-embedded{
+      width:100%!important;
+    }
+    .ml-embedded .ml-form-embedWrapper{
+      background:transparent!important;
+      border:none!important;
+    }
+    .ml-embedded .ml-form-embedBody{
+      padding:0!important;
+    }
+    .ml-embedded .ml-form-embedContent h4,
+    .ml-embedded .ml-form-embedContent p{
+      color:#fff!important;
+    }
+    .ml-embedded input[type="email"]{
+      background:var(--bg-elevated)!important;
+      border:1px solid var(--border)!important;
+      border-radius:12px!important;
+      padding:16px 20px!important;
+      color:#fff!important;
+      font-size:1rem!important;
+      width:100%!important;
+      margin-bottom:15px!important;
+    }
+    .ml-embedded button[type="submit"]{
+      background:var(--accent-gradient)!important;
+      color:#fff!important;
+      border:none!important;
+      border-radius:999px!important;
+      padding:18px 40px!important;
+      font-weight:700!important;
+      font-size:1.1rem!important;
+      width:100%!important;
+      cursor:pointer!important;
+      box-shadow:var(--glow)!important;
+    }
+    .ml-embedded .ml-form-successBody{
+      background:linear-gradient(135deg, rgba(72,187,120,.2), rgba(72,187,120,.1))!important;
+      border:1px solid rgba(72,187,120,.4)!important;
+      border-radius:16px!important;
+      padding:30px!important;
+    }
+    .ml-embedded .ml-form-successBody h4{
+      color:var(--success)!important;
+    }
+    
+    .calendly-cta{
+      margin-top:30px;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+    }
+    .social-proof{
+      background:rgba(72,187,120,.1);
+      border:1px solid rgba(72,187,120,.3);
+      border-radius:16px;
+      padding:20px;
+      margin-top:30px;
+      text-align:left;
+      font-size:0.9rem;
+      color:var(--text-secondary);
+    }
+    .social-proof strong{color:var(--success);}
+    .footer{
+      padding:40px 0;
+      text-align:center;
+      color:var(--text-muted);
+      font-size:0.85rem;
+      border-top:1px solid var(--border);
+      margin-top:60px;
+    }
+    .text-center{text-align:center;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">Launch with Lynette</div>
+    </header>
+    
+    <section class="hero">
+      <div class="urgency-bar">
+        <span class="pulse">🔴</span>
+        <span>127 coaches launched this month. Your spot is waiting.</span>
+      </div>
+      <h1>While you wait to launch, others are <span class="gradient-text">stealing your students</span></h1>
+      <p class="hero-sub">
+        Take this 60-second diagnostic to discover why you're stuck in "almost ready" mode while competitors monetize your expertise
+      </p>
+    </section>
+    
+    <div class="progress-container" id="progress-container">
+      <div class="progress-label">
+        <span>Question <span id="current-q">1</span> of 3</span>
+        <span id="progress-text">33%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+    
+    <div class="quiz-container">
+      <!-- Question 1 -->
+      <div class="question active" data-q="1">
+        <h2>When you think about launching, what's your biggest emotional response?</h2>
+        <div class="options">
+          <button class="option" onclick="selectOption(1, 'tech', 'overwhelm')">
+            <span class="option-emoji">😰</span>
+            <span>Overwhelm — Too many tech pieces to figure out (funnels, emails, checkout)</span>
+          </button>
+          <button class="option" onclick="selectOption(1, 'clarity', 'confusion')">
+            <span class="option-emoji">😵‍💫</span>
+            <span>Confusion — Not sure what to offer or to whom</span>
+          </button>
+          <button class="option" onclick="selectOption(1, 'fear', 'fear')">
+            <span class="option-emoji">😨</span>
+            <span>Fear — What if nobody buys and I look foolish?</span>
+          </button>
+          <button class="option" onclick="selectOption(1, 'time', 'paralysis')">
+            <span class="option-emoji">⏰</span>
+            <span>Paralysis — I don't have time to create everything</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Question 2 -->
+      <div class="question" data-q="2">
+        <h2>How long have you been "about to launch"?</h2>
+        <div class="options">
+          <button class="option" onclick="selectOption(2, 'fresh', 'less3')">
+            <span class="option-emoji">🌱</span>
+            <span>Less than 3 months — I'm fresh but stuck already</span>
+          </button>
+          <button class="option" onclick="selectOption(2, 'stuck', '3to6')">
+            <span class="option-emoji">😤</span>
+            <span>3-6 months — I've been planning forever</span>
+          </button>
+          <button class="option" onclick="selectOption(2, 'veteran', '6plus')">
+            <span class="option-emoji">😔</span>
+            <span>6+ months — I'm embarrassed by how long it's taken</span>
+          </button>
+          <button class="option" onclick="selectOption(2, 'relaunch', 'flopped')">
+            <span class="option-emoji">🔄</span>
+            <span>I launched before but it flopped — trying again</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Question 3 -->
+      <div class="question" data-q="3">
+        <h2>What's your #1 expertise you want to monetize?</h2>
+        <div class="options">
+          <button class="option" onclick="selectOption(3, 'trading', 'trading')">
+            <span class="option-emoji">📈</span>
+            <span>Trading/Investing education</span>
+          </button>
+          <button class="option" onclick="selectOption(3, 'coaching', 'coaching')">
+            <span class="option-emoji">🎯</span>
+            <span>Business, life, or career coaching</span>
+          </button>
+          <button class="option" onclick="selectOption(3, 'creative', 'creative')">
+            <span class="option-emoji">🎨</span>
+            <span>Creative skills (design, writing, marketing)</span>
+          </button>
+          <button class="option" onclick="selectOption(3, 'wellness', 'wellness')">
+            <span class="option-emoji">🧘</span>
+            <span>Health, fitness, or wellness</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Results -->
+      <div class="result-section" id="result-section">
+        <div class="text-center">
+          <div class="result-badge">ANALYSIS COMPLETE</div>
+          <h2 class="result-title" id="result-title"></h2>
+        </div>
+        <div id="result-content"></div>
+        
+        <div class="revenue-counter">
+          <div class="counter-label">Revenue you've lost this month by waiting:</div>
+          <div class="counter-amount" id="revenue-display">$0</div>
+        </div>
+        
+        <!-- Email Capture Gate - MailerLite Embedded Form -->
+        <div class="email-gate" id="email-gate">
+          <div class="discount-badge">⚡ LIMITED: $500 OFF SETUP</div>
+          <h3>Get Your Personalized Launch Plan</h3>
+          <p>Enter your email to unlock your complete 14-day launch strategy based on your <span id="result-type-display"></span> profile</p>
+          
+          <!-- MailerLite Universal Form -->
+          <div class="ml-embedded" data-form="tLP89e"></div>
+          
+          <!-- Calendly CTA -->
+          <div class="calendly-cta" id="calendly-section">
+            <p style="color:var(--text-secondary);margin-bottom:15px;">Want to skip the email and book directly?</p>
+            <a href="https://calendly.com/lynette-wilsonlggrp/consultation?utm_source=mailerlite&utm_medium=email&utm_campaign=quiz_sequence&utm_content=quiz_page" 
+               onclick="if(typeof fbq !== 'undefined') fbq('track', 'Schedule', {content_name: 'Strategy Call Booking'});"
+               style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;border:2px solid var(--accent-pink);color:var(--accent-pink);padding:18px 40px;border-radius:999px;font-weight:700;text-decoration:none;font-family:'Inter',sans-serif;">
+              Book Your Free Strategy Call Now →
+            </a>
+          </div>
+          
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:15px;">
+            🔒 No spam. Unsubscribe anytime. Your results are personalized.
+          </p>
+        </div>
+        
+        <div class="social-proof">
+          <strong>✓ Real Result:</strong> "I spent 8 months trying to build my own funnel. Lynette had me launched in 14 days. First sale came 48 hours after we went live—while I was getting groceries."<br><br>
+          — Sarah M., Trading Psychology Coach
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>© 2026 Launch with Lynette. Launch Signal OS™</p>
+      <p style="margin-top:10px; font-size:0.75rem;">Premium client acquisition systems for launch-focused businesses</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Quiz State
+    let answers = {
+      q1: { type: '', emotion: '' },
+      q2: { time: '', duration: '' },
+      q3: { expertise: '', category: '' }
+    };
+    
+    let currentQuestion = 1;
+    const totalQuestions = 3;
+    
+    const revenueMap = {
+      'fresh': 1500,
+      'stuck': 4500,
+      'veteran': 8500,
+      'relaunch': 3200
+    };
+    
+    const resultTemplates = {
+      tech: {
+        title: "🛠️ The Tech-Trapped Creator",
+        notification: {
+          icon: "🚗",
+          title: "Payment Received: $1,297",
+          sub: "Trading Psychology Blueprint • 2m ago",
+          scenario: "Picture this: You're in the traffic circle waiting to drop your daughter off at school. Phone vibrates. Another student just enrolled. You smile, knowing tonight's dinner is covered—and then some."
+        },
+        painPoints: [
+          "Every day spent wrestling with tech = $500+ in lost revenue",
+          "Your competitors with half your expertise are launching (and selling) because they stopped waiting for 'perfect'",
+          "That course in your head? Someone else is teaching it right now to YOUR audience",
+          "The 'tech learning curve' is actually a disguise for 'I'm scared to put myself out there'"
+        ],
+        solution: "You don't need another tutorial. You need a launch partner who handles the tech while you focus on teaching."
+      },
+      clarity: {
+        title: "🎯 The Clarity-Seeker",
+        notification: {
+          icon: "💰",
+          title: "New Enrollment: $2,500",
+          sub: "Business Launch Accelerator • Just now",
+          scenario: "You're waiting in the school pickup line, checking your phone... and see another client just booked your high-ticket program. That's your mortgage payment. Covered. While you waited."
+        },
+        painPoints: [
+          "Analysis paralysis is costing you $1,000+ per week in potential revenue",
+          "While you 'research,' your audience is buying from louder (but less qualified) creators",
+          "Your expertise has a shelf life — every month you wait, it depreciates",
+          "'I need clarity' often means 'I'm afraid my offer isn't good enough'"
+        ],
+        solution: "You don't need more information. You need a proven framework to package what you know into an offer that sells itself."
+      },
+      fear: {
+        title: "🛡️ The Fear-Frozen Expert",
+        notification: {
+          icon: "🎉",
+          title: "Course Sale: $497",
+          sub: "Launch with Lynette • Just now",
+          scenario: "You're standing in line at the grocery store. Your phone buzzes. You just made money while buying milk. The person behind you has no idea that while you waited to pay for cereal, someone invested in your expertise."
+        },
+        painPoints: [
+          "Fear of failure has already cost you more than any failed launch ever could",
+          "Your audience is asking for help — and going elsewhere when you don't answer",
+          "Imposter syndrome doesn't pay the bills (but launched expertise does)",
+          "Every 'what if they don't buy?' is costing you actual students who WOULD buy"
+        ],
+        solution: "Confidence comes from competence. Let's validate your offer before you build, so you KNOW it will sell."
+      },
+      time: {
+        title: "⏰ The Time-Starved Professional",
+        notification: {
+          icon: "☕",
+          title: "Payment Received: $997",
+          sub: "Morning Routine Course • 8:15 AM",
+          scenario: "You're sipping coffee before the kids wake up. Your phone lights up with a sale notification. You just earned $997 before breakfast. That's the power of a launched course working while you live."
+        },
+        painPoints: [
+          "'I don't have time' really means 'I'm doing it alone'",
+          "DIY launch attempts take 6+ months. Done-with-you launches take 2-3 weeks.",
+          "Every week you trade time for money is a week you're not building scalable income",
+          "Your family is waiting for you to be present—launching creates that freedom"
+        ],
+        solution: "You need a launch system, not more late nights. I handle the heavy lifting while you handle the expertise."
+      }
+    };
+    
+    function selectOption(qNum, resultType, value) {
+      if (qNum === 1) {
+        answers.q1 = { type: resultType, emotion: value };
+      } else if (qNum === 2) {
+        answers.q2 = { time: resultType, duration: value };
+      } else if (qNum === 3) {
+        answers.q3 = { expertise: resultType, category: value };
+      }
+      
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'QuizProgress', {
+          question: qNum,
+          total_questions: totalQuestions,
+          answer: value
+        });
+      }
+      
+      const options = document.querySelectorAll(`[data-q="${qNum}"] .option`);
+      options.forEach(opt => opt.classList.remove('selected'));
+      event.target.closest('.option').classList.add('selected');
+      
+      setTimeout(() => {
+        if (qNum < totalQuestions) {
+          nextQuestion(qNum + 1);
+        } else {
+          showResults();
+        }
+      }, 400);
+    }
+    
+    function nextQuestion(qNum) {
+      document.querySelector(`[data-q="${currentQuestion}"]`).classList.remove('active');
+      currentQuestion = qNum;
+      document.querySelector(`[data-q="${currentQuestion}"]`).classList.add('active');
+      updateProgress();
+    }
+    
+    function updateProgress() {
+      const progress = (currentQuestion / totalQuestions) * 100;
+      document.getElementById('progress-fill').style.width = progress + '%';
+      document.getElementById('current-q').textContent = currentQuestion;
+      document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+    }
+    
+    function showResults() {
+      const primaryResult = answers.q1.type;
+      const template = resultTemplates[primaryResult];
+      const revenueLost = revenueMap[answers.q2.time] || 3000;
+      
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      document.getElementById('progress-container').style.display = 'none';
+      document.getElementById('result-section').classList.add('active');
+      
+      document.getElementById('result-title').textContent = template.title;
+      document.getElementById('result-type-display').textContent = primaryResult;
+      document.getElementById('revenue-display').textContent = '$' + revenueLost.toLocaleString();
+      
+      const notificationHTML = `
+        <div class="notification-mockup">
+          <div class="phone-screen">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">9:47 AM</div>
+            <div class="notification">
+              <div class="notif-title">${template.notification.icon} ${template.notification.title}</div>
+              <div class="notif-sub">${template.notification.sub}</div>
+            </div>
+            <p class="scenario-text">"${template.notification.scenario}"</p>
+          </div>
+        </div>
+      `;
+      
+      const painPointsHTML = `
+        <div class="pain-box">
+          <h3>💸 Your Hidden Cost of Waiting:</h3>
+          <ul>
+            ${template.painPoints.map(point => `<li>${point}</li>`).join('')}
+          </ul>
+        </div>
+        <p style="color:var(--text-secondary);font-size:1.1rem;margin:25px 0;text-align:center;">
+          <strong>The Fix:</strong> ${template.solution}
+        </p>
+      `;
+      
+      document.getElementById('result-content').innerHTML = notificationHTML + painPointsHTML;
+      
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'QuizCompleted', {
+          result: primaryResult,
+          revenue_lost: revenueLost,
+          expertise: answers.q3.expertise,
+          value: 0.00,
+          currency: 'USD'
+        });
+      }
+      
+      document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    updateProgress();
+  </script>
+</body>
+</html>
