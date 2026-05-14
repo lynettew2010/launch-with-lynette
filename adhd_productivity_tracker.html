@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Productivity Tracker — Launch with Lynette</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05050A;
+  --bg2: #0D0D1A;
+  --bg3: #141428;
+  --pink: #E83E8C;
+  --pink-light: rgba(232,62,140,0.1);
+  --pink-mid: rgba(232,62,140,0.25);
+  --purple: #8B5CF6;
+  --purple-light: rgba(139,92,246,0.1);
+  --purple-mid: rgba(139,92,246,0.25);
+  --teal: #10B981;
+  --teal-light: rgba(16,185,129,0.1);
+  --amber: #F59E0B;
+  --amber-light: rgba(245,158,11,0.1);
+  --red: #EF4444;
+  --text: #F6F4FF;
+  --text2: rgba(246,244,255,0.72);
+  --text3: rgba(246,244,255,0.45);
+  --text4: rgba(246,244,255,0.22);
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80vw 50vh at 20% 0%, rgba(139,92,246,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 60vw 40vh at 80% 80%, rgba(232,62,140,0.08) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 1.25rem;
+  padding: 5px 14px;
+  border: 0.5px solid var(--pink-mid);
+  border-radius: 999px;
+  background: var(--pink-light);
+}
+
+.header h1 {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #fff 20%, rgba(232,62,140,0.9) 60%, rgba(139,92,246,0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-sub {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* HOW TO USE */
+.how-to {
+  background: var(--bg2);
+  border: 0.5px solid var(--border2);
+  border-radius: 20px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-to::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+}
+
+.how-to-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.how-to-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.how-to-card {
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.how-to-icon {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.how-to-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.how-to-label.pink { color: var(--pink); }
+.how-to-label.purple { color: var(--purple); }
+.how-to-label.teal { color: var(--teal); }
+.how-to-label.amber { color: var(--amber); }
+
+.how-to-desc {
+  font-size: 12.5px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.how-to-tips {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.tip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pink);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+/* APP CONTAINER */
+.app {
+  background: var(--bg2);
+  border: 0.5px solid var(--border2);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 0;
+  background: var(--bg3);
+  border-bottom: 0.5px solid var(--border2);
+}
+
+.tab {
+  flex: 1;
+  padding: 14px 8px;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border-right: 0.5px solid var(--border);
+  position: relative;
+}
+
+.tab:last-child { border-right: none; }
+
+.tab.active {
+  color: var(--text);
+  background: var(--bg2);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+}
+
+.tab-icon { font-size: 16px; }
+.tab-name { font-size: 11px; }
+
+.tab-count {
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.count-pink { background: var(--pink-light); color: var(--pink); }
+.count-purple { background: var(--purple-light); color: var(--purple); }
+.count-teal { background: var(--teal-light); color: var(--teal); }
+
+/* PANELS */
+.panel { display: none; padding: 1.5rem; }
+.panel.active { display: block; }
+
+/* FOCUS BANNER */
+.focus-banner {
+  background: var(--purple-light);
+  border: 0.5px solid var(--purple-mid);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.focus-icon { font-size: 20px; flex-shrink: 0; }
+
+.focus-text {
+  flex: 1;
+  font-size: 13px;
+  color: rgba(139,92,246,0.9);
+  line-height: 1.5;
+}
+
+.focus-text strong { color: var(--purple); font-weight: 600; }
+
+.limit-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--pink);
+  color: white;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ADD ROW */
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.add-row input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 0.5px solid var(--border2);
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .15s;
+}
+
+.add-row input[type="text"]:focus { border-color: var(--pink); }
+.add-row input[type="text"]::placeholder { color: var(--text4); }
+
+.add-row select {
+  padding: 10px 12px;
+  border: 0.5px solid var(--border2);
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-row select option { background: var(--bg3); }
+
+.btn-add {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+
+.btn-add:hover { opacity: 0.9; }
+
+/* TASK LIST */
+.task-list { display: flex; flex-direction: column; gap: 6px; min-height: 40px; }
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.task-item:hover { border-color: var(--border2); transform: translateY(-1px); }
+
+.task-item.done {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+.task-item.done .task-label {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+
+.task-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  border: 2px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .2s;
+  font-size: 13px;
+  color: white;
+}
+
+.task-item.done .task-checkbox {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.task-label {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.task-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .06em;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.cat-work { background: var(--purple-light); color: var(--purple); }
+.cat-personal { background: var(--pink-light); color: var(--pink); }
+.cat-travel { background: var(--teal-light); color: var(--teal); }
+.cat-urgent { background: rgba(239,68,68,0.1); color: var(--red); }
+
+.task-actions {
+  display: flex;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity .15s;
+}
+
+.task-item:hover .task-actions { opacity: 1; }
+
+.task-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all .15s;
+}
+
+.task-btn:hover { background: var(--border); color: var(--text); }
+.task-btn.del:hover { background: rgba(239,68,68,0.12); color: var(--red); }
+.task-btn.move-up:hover { background: var(--purple-light); color: var(--purple); }
+.task-btn.move-down:hover { background: var(--pink-light); color: var(--pink); }
+
+.done-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text4);
+  white-space: nowrap;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border2);
+  border-radius: 14px;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+.empty-emoji { font-size: 32px; display: block; margin-bottom: 10px; }
+
+/* DONE BANNER */
+.done-banner {
+  background: var(--teal-light);
+  border: 0.5px solid rgba(16,185,129,0.25);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.done-banner-text { flex: 1; font-size: 13px; color: var(--teal); }
+.done-big-num { font-family: 'Cabinet Grotesk', sans-serif; font-size: 2rem; font-weight: 900; color: var(--teal); line-height: 1; }
+
+.btn-clear {
+  font-size: 12px;
+  padding: 5px 14px;
+  border: 0.5px solid rgba(16,185,129,0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .15s;
+}
+
+.btn-clear:hover { background: var(--teal-light); }
+
+/* CALENDAR */
+.week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+  background: var(--bg3);
+}
+
+.week-day:hover { border-color: var(--pink); }
+.week-day.is-today { border-color: var(--pink); background: var(--pink-light); }
+.week-day.is-selected { border-color: var(--purple); background: var(--purple-light); }
+
+.wd-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+.week-day.is-today .wd-name { color: var(--pink); }
+.week-day.is-selected .wd-name { color: var(--purple); }
+
+.wd-num {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.wd-dots { display: flex; gap: 2px; min-height: 7px; }
+.wd-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); }
+
+.cal-selected-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.cal-task-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.cal-time-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text4);
+  min-width: 40px;
+}
+
+.cal-task-label { flex: 1; font-size: 13px; color: var(--text); }
+
+.gcal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 0.5px solid var(--border2);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text3);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.gcal-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-light); }
+
+.no-cal-tasks {
+  text-align: center;
+  padding: 1.5rem;
+  border: 1px dashed var(--border2);
+  border-radius: 12px;
+  color: var(--text3);
+  font-size: 13px;
+  margin-bottom: 0.75rem;
+}
+
+.add-cal-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 0.75rem;
+}
+
+.add-cal-row input[type="text"] {
+  flex: 1;
+  padding: 9px 12px;
+  border: 0.5px solid var(--border2);
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.add-cal-row input[type="text"]:focus { border-color: var(--pink); }
+.add-cal-row input[type="text"]::placeholder { color: var(--text4); }
+
+.add-cal-row input[type="time"] {
+  padding: 9px 10px;
+  border: 0.5px solid var(--border2);
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--text2);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  outline: none;
+  width: 100px;
+}
+
+.btn-sm {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* SECTION DIVIDER */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1rem 0 0.5rem;
+}
+
+.section-divider-line { flex: 1; height: 0.5px; background: var(--border); }
+.section-divider-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text4);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--border);
+}
+
+.footer-brand {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.footer-brand span {
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+.footer-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--text4);
+  margin-top: 6px;
+}
+
+@media (max-width: 540px) {
+  .page { padding: 1rem 1rem 3rem; }
+  .how-to-grid { grid-template-columns: 1fr; }
+  .how-to-tips { grid-template-columns: 1fr; }
+  .add-row { flex-wrap: wrap; }
+  .add-row select { width: 100%; }
+  .add-row input[type="text"] { min-width: 0; }
+  .tabs .tab-name { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand-logo">⚡ Launch with Lynette</div>
+  <h1>ADHD Productivity<br>Tracker</h1>
+  <p class="header-sub">Built for brains that work differently. No overwhelm. No walls of tasks. Just focus, flow, and the satisfying click of done.</p>
+</div>
+
+<!-- HOW TO USE -->
+<div class="how-to">
+  <div class="how-to-title">
+    📋 How to use this tracker
+  </div>
+  <div class="how-to-grid">
+    <div class="how-to-card">
+      <div class="how-to-icon">☀️</div>
+      <div class="how-to-label pink">Today — max 5 tasks</div>
+      <div class="how-to-desc">Add only what you will actually do today. The limit is the feature. Click any task to check it off. It moves to Done automatically.</div>
+    </div>
+    <div class="how-to-card">
+      <div class="how-to-icon">📝</div>
+      <div class="how-to-label purple">Backlog — everything else</div>
+      <div class="how-to-desc">Dump every task, idea, and to-do here. Nothing gets lost. When you are ready to work on something, tap the arrow to move it to Today.</div>
+    </div>
+    <div class="how-to-card">
+      <div class="how-to-icon">📅</div>
+      <div class="how-to-label teal">Calendar — schedule ahead</div>
+      <div class="how-to-desc">Click any day to add tasks with a time. Each task has an Add to Google button that opens Google Calendar pre-filled. One click adds the reminder.</div>
+    </div>
+    <div class="how-to-card">
+      <div class="how-to-icon">🏆</div>
+      <div class="how-to-label amber">Done — your wins</div>
+      <div class="how-to-desc">Every completed task lives here with the time you finished it. ADHD brains need to see progress. The pile of done items is the motivation to keep going.</div>
+    </div>
+  </div>
+  <div class="how-to-tips">
+    <div class="tip-item"><div class="tip-dot"></div><span>Use Urgent for anything that cannot wait today</span></div>
+    <div class="tip-item"><div class="tip-dot"></div><span>Hover any task to see move and delete buttons</span></div>
+    <div class="tip-item"><div class="tip-dot"></div><span>Data lives in this browser tab only. Bookmark it.</span></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('today')" id="tab-today">
+      <span class="tab-icon">☀️</span>
+      <span class="tab-name">Today</span>
+      <span class="tab-count count-pink" id="count-today">0</span>
+    </button>
+    <button class="tab" onclick="showTab('backlog')" id="tab-backlog">
+      <span class="tab-icon">📝</span>
+      <span class="tab-name">Backlog</span>
+      <span class="tab-count count-purple" id="count-backlog">0</span>
+    </button>
+    <button class="tab" onclick="showTab('calendar')" id="tab-calendar">
+      <span class="tab-icon">📅</span>
+      <span class="tab-name">Calendar</span>
+    </button>
+    <button class="tab" onclick="showTab('done')" id="tab-done">
+      <span class="tab-icon">🏆</span>
+      <span class="tab-name">Done</span>
+      <span class="tab-count count-teal" id="count-done">0</span>
+    </button>
+  </div>
+
+  <!-- TODAY -->
+  <div class="panel active" id="panel-today">
+    <div class="focus-banner">
+      <span class="focus-icon">🧠</span>
+      <div class="focus-text"><strong>Focus mode.</strong> Maximum 5 tasks today. Everything else stays in the backlog where it belongs.</div>
+      <span class="limit-badge" id="today-limit">0 / 5</span>
+    </div>
+    <div class="add-row">
+      <input type="text" id="today-input" placeholder="What are you doing today?" onkeydown="if(event.key==='Enter')addTask('today')">
+      <select id="today-cat">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="travel">Travel</option>
+        <option value="urgent">Urgent</option>
+      </select>
+      <button class="btn-add" onclick="addTask('today')">+ Add</button>
+    </div>
+    <div class="task-list" id="today-list"></div>
+  </div>
+
+  <!-- BACKLOG -->
+  <div class="panel" id="panel-backlog">
+    <div class="add-row">
+      <input type="text" id="backlog-input" placeholder="Add anything here. Nothing gets lost." onkeydown="if(event.key==='Enter')addTask('backlog')">
+      <select id="backlog-cat">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="travel">Travel</option>
+        <option value="urgent">Urgent</option>
+      </select>
+      <button class="btn-add" onclick="addTask('backlog')">+ Add</button>
+    </div>
+    <div class="task-list" id="backlog-list"></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="panel" id="panel-calendar">
+    <div class="week-strip" id="week-strip"></div>
+    <div class="cal-selected-label" id="cal-day-label">Select a day above to view or add tasks</div>
+    <div id="cal-task-list"></div>
+    <div class="add-cal-row">
+      <input type="text" id="cal-input" placeholder="Task for selected day...">
+      <input type="time" id="cal-time" value="09:00">
+      <button class="btn-sm" onclick="addCalTask()">Add</button>
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div class="panel" id="panel-done">
+    <div class="done-banner">
+      <span style="font-size:22px;">🏆</span>
+      <div class="done-banner-text">Tasks completed. Every single one counts.</div>
+      <div class="done-big-num" id="done-num">0</div>
+      <button class="btn-clear" onclick="clearDone()">Clear all</button>
+    </div>
+    <div class="task-list" id="done-list"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Launch with <span>Lynette</span></div>
+  <div class="footer-note">launchsignalpro.com · @Lynettew26</div>
+  <div class="footer-tagline">Find the money leak. Fix what matters. Win the client.</div>
+</div>
+
+</div>
+
+<script>
+const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+const state = { today: [], backlog: [], done: [], calendar: {}, selectedDay: null };
+
+function catClass(c) {
+  return { work:'cat-work', personal:'cat-personal', travel:'cat-travel', urgent:'cat-urgent' }[c] || 'cat-work';
+}
+function catLabel(c) {
+  return { work:'Work', personal:'Personal', travel:'Travel', urgent:'Urgent' }[c] || 'Work';
+}
+
+function addTask(list) {
+  const input = document.getElementById(list + '-input');
+  const cat = document.getElementById(list + '-cat').value;
+  const text = input.value.trim();
+  if (!text) return;
+  if (list === 'today' && state.today.filter(t => !t.done).length >= 5) {
+    input.style.borderColor = '#EF4444';
+    input.placeholder = 'Max 5 tasks. Move one to backlog first.';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.placeholder = 'What are you doing today?';
+    }, 1800);
+    return;
+  }
+  state[list].push({ id: Date.now(), text, cat, done: false });
+  input.value = '';
+  render();
+}
+
+function toggleDone(id) {
+  let task = null; let src = null;
+  ['today', 'backlog'].forEach(list => {
+    const idx = state[list].findIndex(t => t.id === id);
+    if (idx > -1) { task = state[list][idx]; src = list; }
+  });
+  if (!task || task.done) return;
+  state[src] = state[src].filter(t => t.id !== id);
+  task.done = true;
+  task.doneAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  state.done.unshift(task);
+  render();
+}
+
+function deleteTask(id, list) {
+  state[list] = state[list].filter(t => t.id !== id);
+  render();
+}
+
+function moveToToday(id) {
+  if (state.today.filter(t => !t.done).length >= 5) return;
+  const idx = state.backlog.findIndex(t => t.id === id);
+  if (idx === -1) return;
+  const task = state.backlog.splice(idx, 1)[0];
+  state.today.push(task);
+  showTab('today');
+  render();
+}
+
+function moveToBacklog(id) {
+  const idx = state.today.findIndex(t => t.id === id);
+  if (idx === -1) return;
+  const task = state.today.splice(idx, 1)[0];
+  state.backlog.push(task);
+  render();
+}
+
+function clearDone() { state.done = []; render(); }
+
+function makeTaskEl(task, list) {
+  const div = document.createElement('div');
+  div.className = 'task-item' + (task.done ? ' done' : '');
+
+  const chk = document.createElement('div');
+  chk.className = 'task-checkbox';
+  if (task.done) chk.innerHTML = '✓';
+  div.appendChild(chk);
+
+  const lbl = document.createElement('div');
+  lbl.className = 'task-label';
+  lbl.textContent = task.text;
+  div.appendChild(lbl);
+
+  if (task.doneAt) {
+    const t = document.createElement('div');
+    t.className = 'done-time';
+    t.textContent = task.doneAt;
+    div.appendChild(t);
+  }
+
+  const cat = document.createElement('span');
+  cat.className = 'task-cat ' + catClass(task.cat);
+  cat.textContent = catLabel(task.cat);
+  div.appendChild(cat);
+
+  if (!task.done) {
+    const acts = document.createElement('div');
+    acts.className = 'task-actions';
+
+    if (list === 'backlog') {
+      const up = document.createElement('button');
+      up.className = 'task-btn move-up';
+      up.title = 'Move to Today';
+      up.innerHTML = '↑';
+      up.onclick = e => { e.stopPropagation(); moveToToday(task.id); };
+      acts.appendChild(up);
+    }
+
+    if (list === 'today') {
+      const dn = document.createElement('button');
+      dn.className = 'task-btn move-down';
+      dn.title = 'Move to Backlog';
+      dn.innerHTML = '↓';
+      dn.onclick = e => { e.stopPropagation(); moveToBacklog(task.id); };
+      acts.appendChild(dn);
+    }
+
+    const del = document.createElement('button');
+    del.className = 'task-btn del';
+    del.title = 'Delete task';
+    del.innerHTML = '×';
+    del.onclick = e => { e.stopPropagation(); deleteTask(task.id, list); };
+    acts.appendChild(del);
+
+    div.appendChild(acts);
+    div.onclick = () => toggleDone(task.id);
+  }
+
+  return div;
+}
+
+function renderList(list) {
+  const el = document.getElementById(list + '-list');
+  el.innerHTML = '';
+  if (!state[list].length) {
+    const msgs = {
+      today: { icon: '☀️', msg: 'Add up to 5 tasks to focus on today' },
+      backlog: { icon: '📝', msg: 'Your backlog is empty. Add anything you need to remember.' },
+      done: { icon: '🏆', msg: 'Completed tasks appear here. Keep going.' }
+    };
+    const m = msgs[list] || { icon: '📝', msg: 'Nothing here yet.' };
+    el.innerHTML = `<div class="empty-state"><span class="empty-emoji">${m.icon}</span>${m.msg}</div>`;
+    return;
+  }
+  state[list].forEach(t => el.appendChild(makeTaskEl(t, list)));
+}
+
+function buildWeekStrip() {
+  const strip = document.getElementById('week-strip');
+  strip.innerHTML = '';
+  const now = new Date();
+  const todayStr = now.toDateString();
+  const start = new Date(now);
+  start.setDate(now.getDate() - now.getDay());
+
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    const key = d.toISOString().split('T')[0];
+    const tasks = state.calendar[key] || [];
+    const isToday = d.toDateString() === todayStr;
+    const isSel = state.selectedDay === key;
+
+    const btn = document.createElement('div');
+    btn.className = 'week-day' + (isToday ? ' is-today' : '') + (isSel ? ' is-selected' : '');
+    btn.onclick = () => selectDay(key, d);
+
+    const nm = document.createElement('div');
+    nm.className = 'wd-name';
+    nm.textContent = DAYS[d.getDay()];
+
+    const num = document.createElement('div');
+    num.className = 'wd-num';
+    num.textContent = d.getDate();
+
+    const dots = document.createElement('div');
+    dots.className = 'wd-dots';
+    tasks.slice(0, 3).forEach(() => {
+      const dot = document.createElement('div');
+      dot.className = 'wd-dot';
+      dots.appendChild(dot);
+    });
+
+    btn.appendChild(nm);
+    btn.appendChild(num);
+    btn.appendChild(dots);
+    strip.appendChild(btn);
+  }
+}
+
+function selectDay(key, date) {
+  state.selectedDay = key;
+  document.getElementById('cal-day-label').textContent =
+    DAYS[date.getDay()] + ', ' + MONTHS[date.getMonth()] + ' ' + date.getDate();
+
+  const list = document.getElementById('cal-task-list');
+  list.innerHTML = '';
+  const tasks = state.calendar[key] || [];
+
+  if (!tasks.length) {
+    list.innerHTML = '<div class="no-cal-tasks">No tasks for this day. Add one below.</div>';
+  } else {
+    tasks.forEach((t, i) => {
+      const row = document.createElement('div');
+      row.className = 'cal-task-row';
+
+      const tl = document.createElement('span');
+      tl.className = 'cal-time-label';
+      tl.textContent = t.time || '';
+
+      const lbl = document.createElement('div');
+      lbl.className = 'cal-task-label';
+      lbl.textContent = t.text;
+
+      const dtStart = new Date(key + 'T' + (t.time || '09:00') + ':00');
+      const dtEnd = new Date(dtStart.getTime() + 60 * 60 * 1000);
+      const fmt = d => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      const gcal = document.createElement('a');
+      gcal.className = 'gcal-btn';
+      gcal.innerHTML = '📅 Google Cal';
+      gcal.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(t.text)}&dates=${fmt(dtStart)}/${fmt(dtEnd)}`;
+      gcal.target = '_blank';
+
+      const del = document.createElement('button');
+      del.className = 'task-btn del';
+      del.innerHTML = '×';
+      del.title = 'Delete';
+      del.style.cssText = 'width:26px;height:26px;border:none;border-radius:7px;background:transparent;cursor:pointer;font-size:16px;color:rgba(246,244,255,0.35);transition:all .15s;';
+      del.onclick = () => {
+        state.calendar[key].splice(i, 1);
+        if (!state.calendar[key].length) delete state.calendar[key];
+        selectDay(key, date);
+        buildWeekStrip();
+      };
+
+      row.appendChild(tl);
+      row.appendChild(lbl);
+      row.appendChild(gcal);
+      row.appendChild(del);
+      list.appendChild(row);
+    });
+  }
+
+  buildWeekStrip();
+}
+
+function addCalTask() {
+  if (!state.selectedDay) {
+    document.getElementById('cal-input').placeholder = 'Select a day first';
+    setTimeout(() => document.getElementById('cal-input').placeholder = 'Task for selected day...', 1500);
+    return;
+  }
+  const text = document.getElementById('cal-input').value.trim();
+  const time = document.getElementById('cal-time').value;
+  if (!text) return;
+  if (!state.calendar[state.selectedDay]) state.calendar[state.selectedDay] = [];
+  state.calendar[state.selectedDay].push({ text, time });
+  state.calendar[state.selectedDay].sort((a, b) => (a.time || '').localeCompare(b.time || ''));
+  document.getElementById('cal-input').value = '';
+  const d = new Date(state.selectedDay);
+  selectDay(state.selectedDay, d);
+  buildWeekStrip();
+}
+
+function updateCounts() {
+  document.getElementById('count-today').textContent = state.today.length;
+  document.getElementById('count-backlog').textContent = state.backlog.length;
+  document.getElementById('count-done').textContent = state.done.length;
+  document.getElementById('done-num').textContent = state.done.length;
+  document.getElementById('today-limit').textContent = state.today.filter(t => !t.done).length + ' / 5';
+}
+
+function render() {
+  renderList('today');
+  renderList('backlog');
+  renderList('done');
+  updateCounts();
+  if (document.getElementById('panel-calendar').classList.contains('active')) {
+    buildWeekStrip();
+    if (state.selectedDay) selectDay(state.selectedDay, new Date(state.selectedDay));
+  }
+}
+
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'calendar') buildWeekStrip();
+}
+
+render();
+buildWeekStrip();
+</script>
+</body>
+</html>
